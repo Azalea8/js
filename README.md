@@ -1,1 +1,1 @@
-# 学习js的基本
+# 学习javascript的基本
