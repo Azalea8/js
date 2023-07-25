@@ -30,18 +30,18 @@ class Quadtree {
         const verticalMidpoint = this.x + this.w / 2;
         const horizontalMidpoint = this.y + this.h / 2;
 
-        const topQuadrant = obj.y < horizontalMidpoint && obj.y + obj.h < horizontalMidpoint;
-        const bottomQuadrant = obj.y > horizontalMidpoint;
+        const topQuadrant = obj.y + obj.radius < horizontalMidpoint;
+        const bottomQuadrant = obj.y - obj.radius > horizontalMidpoint;
 
         let index = -1;
 
-        if (obj.x < verticalMidpoint && obj.x + obj.w < verticalMidpoint) {
+        if (obj.x + obj.radius < verticalMidpoint) {
             if (topQuadrant) {
                 index = 1;
             } else if (bottomQuadrant) {
                 index = 2;
             }
-        } else if (obj.x > verticalMidpoint) {
+        } else if (obj.x - obj.radius > verticalMidpoint) {
             if (topQuadrant) {
                 index = 0;
             } else if (bottomQuadrant) {
@@ -123,7 +123,7 @@ class Quadtree {
     }
 
     contains(obj) {
-        return obj.x >= this.x && obj.y >= this.y && obj.x + obj.w <= this.x + this.w && obj.y + obj.h <= this.y + this.h;
+        return obj.x >= this.x && obj.y >= this.y && obj.x + obj.radius <= this.x + this.w && obj.y + obj.radius <= this.y + this.h;
     }
 }
 
